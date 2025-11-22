@@ -3,245 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DaThiccNow | τ-bit Aperture Interface</title>
-    <meta name="description" content="Quantum Temporal Composition Interface. Manipulate the Thicc NOW.">
+    <title>atmanOS | Volumetric Composition Node</title>
+    <meta name="description" content="Unified Field Theory Interface. Coherence Maximization Engine.">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Xenial Palette */
+        /* -- XENIAL PHYSICS PALETTE -- */
         :root {
+            --void-deep: #030304;
+            --void-light: #0a0a0f;
             --xenial-gold: #FFD700;
-            --xenial-void: #08080b;
-            --xenial-purple: #9d4edd;
-            --chronos-red: #ff4d4d;
-            --kairos-blue: #00f3ff;
-            --glass-panel: rgba(15, 15, 20, 0.85);
+            --xenial-gold-dim: rgba(255, 215, 0, 0.1);
+            --coherence-teal: #00f3ff;
+            --entropy-red: #ff3333;
+            --plenum-purple: #7b2cbf;
+            --glass-panel: rgba(10, 10, 15, 0.9);
         }
 
         body {
-            background-color: var(--xenial-void);
-            color: #e0e0e0;
-            font-family: 'Cinzel', 'Courier New', serif; /* Blending the ancient and technical */
+            background-color: var(--void-deep);
+            color: #c0c0c0;
+            font-family: 'Cinzel', serif;
             overflow: hidden;
             touch-action: none;
         }
 
-        /* Scanlines - Now "Scalar Field Interference" */
-        .scalar-field {
+        /* -- VIBRATIONAL SUBSTRATE BACKGROUND -- */
+        .frequency-field {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(157, 78, 221, 0.03) 2px,
-                    rgba(157, 78, 221, 0.03) 4px
-                );
+                radial-gradient(circle at 50% 50%, rgba(123, 44, 191, 0.05) 0%, transparent 50%),
+                linear-gradient(0deg, transparent 24%, rgba(255, 215, 0, 0.02) 25%, rgba(255, 215, 0, 0.02) 26%, transparent 27%, transparent 74%, rgba(255, 215, 0, 0.02) 75%, rgba(255, 215, 0, 0.02) 76%, transparent 77%),
+                linear-gradient(90deg, transparent 24%, rgba(255, 215, 0, 0.02) 25%, rgba(255, 215, 0, 0.02) 26%, transparent 27%, transparent 74%, rgba(255, 215, 0, 0.02) 75%, rgba(255, 215, 0, 0.02) 76%, transparent 77%);
+            background-size: 100% 100%, 60px 60px, 60px 60px;
+            animation: substrate-shift 60s linear infinite;
+            z-index: -1;
             pointer-events: none;
-            z-index: 900;
         }
 
-        /* Aperture Glow */
-        .aperture-glow {
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+        @keyframes substrate-shift {
+            0% { background-position: center, 0 0, 0 0; }
+            100% { background-position: center, 0 60px, 60px 0; }
         }
 
-        /* Tool Buttons */
+        /* -- UI COMPONENTS -- */
+        .font-tech { font-family: 'Courier New', monospace; letter-spacing: 0.05em; }
+        
+        .panel {
+            background: var(--glass-panel);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+        }
+
         .tool-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
-        .tool-btn.active-kairos {
-            background: rgba(0, 243, 255, 0.1);
-            border-color: var(--kairos-blue);
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
-            color: var(--kairos-blue);
+        .tool-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
         }
         
-        .tool-btn.active-chronos {
-            background: rgba(255, 77, 77, 0.1);
-            border-color: var(--chronos-red);
-            box-shadow: 0 0 15px rgba(255, 77, 77, 0.2);
-            color: var(--chronos-red);
+        .tool-btn:hover::before { transform: translateX(100%); }
+
+        .active-ingression {
+            background: rgba(0, 243, 255, 0.05);
+            border-color: var(--coherence-teal);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
+            color: var(--coherence-teal);
+        }
+        
+        .active-dissonance {
+            background: rgba(255, 51, 51, 0.05);
+            border-color: var(--entropy-red);
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.15);
+            color: var(--entropy-red);
         }
 
-        /* Sliders */
+        .active-harmonize {
+            background: rgba(255, 215, 0, 0.05);
+            border-color: var(--xenial-gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+            color: var(--xenial-gold);
+        }
+
+        /* -- SLIDERS -- */
         input[type="range"] {
             -webkit-appearance: none;
-            background: #222;
-            height: 2px;
-            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            height: 1px;
         }
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
-            background: var(--xenial-gold);
-            border: 2px solid #000;
-            border-radius: 50%;
+            width: 16px; height: 16px;
+            background: black;
+            border: 1px solid var(--xenial-gold);
+            transform: rotate(45deg);
             cursor: pointer;
             box-shadow: 0 0 10px var(--xenial-gold);
         }
 
-        /* Canvas Background */
-        #canvas-container {
-            background-color: #050505;
-            background-image: 
-                radial-gradient(circle at center, #1a1a2e 0%, #000 70%);
+        /* -- COHERENCE GRAPH -- */
+        .coherence-line {
+            stroke: var(--coherence-teal);
+            stroke-width: 1.5;
+            fill: none;
+            filter: drop-shadow(0 0 4px var(--coherence-teal));
         }
 
-        /* Typography */
-        .font-tech { font-family: 'Courier New', monospace; }
-        .font-header { font-family: system-ui, -apple-system, sans-serif; letter-spacing: 0.1em; }
-
-        /* Animations */
-        @keyframes pulse-gold {
-            0%, 100% { box-shadow: 0 0 5px var(--xenial-gold); }
-            50% { box-shadow: 0 0 15px var(--xenial-gold); }
+        /* -- ANIMATIONS -- */
+        @keyframes text-flicker {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0.3; }
+            94% { opacity: 1; }
+            96% { opacity: 1; }
+            97% { opacity: 0.5; }
+            98% { opacity: 1; }
         }
-        .animate-kairos { animation: pulse-gold 3s infinite; }
+        .flicker { animation: text-flicker 5s infinite; }
 
-        /* Glitch Text for "Status" */
-        .status-text {
-            text-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
-        }
     </style>
 </head>
-<body class="h-screen flex flex-col">
+<body class="h-screen flex flex-col selection:bg-[var(--xenial-gold)] selection:text-black">
 
-    <div class="scalar-field"></div>
+    <div class="frequency-field"></div>
 
-    <!-- Header: The Compositional Deck -->
-    <header class="h-16 flex items-center justify-between px-6 bg-black border-b border-[#333] z-50 relative">
+    <!-- HEADER: The Oracle Deck -->
+    <header class="h-16 flex items-center justify-between px-6 bg-black/80 border-b border-white/10 z-50 backdrop-blur-md">
         <div class="flex items-center gap-4">
-            <!-- The τ-bit Icon -->
-            <div class="w-8 h-8 rounded-full border border-[var(--xenial-gold)] flex items-center justify-center animate-kairos bg-black/50">
-                <span class="text-[var(--xenial-gold)] font-serif italic text-lg">τ</span>
+            <div class="w-8 h-8 flex items-center justify-center border border-[var(--xenial-gold)] rotate-45 animate-[spin_10s_linear_infinite]">
+                <div class="w-4 h-4 bg-[var(--xenial-gold)] opacity-50 rotate-45"></div>
             </div>
             <div>
-                <h1 class="text-xl font-header font-bold text-white tracking-widest">
-                    DaThicc<span class="text-[var(--xenial-gold)]">NOW</span>
+                <h1 class="text-xl font-bold tracking-[0.2em] text-white">
+                    atman<span class="text-[var(--xenial-gold)]">OS</span>
                 </h1>
-                <p class="text-[10px] text-gray-500 font-tech uppercase tracking-widest">
-                    Aperture State Interface v2.0
+                <p class="text-[9px] text-[var(--coherence-teal)] font-tech uppercase tracking-widest flicker">
+                    Unified Field Interface // v3.1
                 </p>
             </div>
         </div>
         
-        <div class="flex gap-4 items-center">
-            <span id="system-status" class="hidden md:block text-[10px] font-tech text-[var(--kairos-blue)] animate-pulse">
-                /// CONNECTED TO PLENUM ///
-            </span>
-            <label for="fileInput" class="border border-[var(--xenial-gold)] text-[var(--xenial-gold)] hover:bg-[var(--xenial-gold)] hover:text-black px-4 py-1 text-xs cursor-pointer transition-colors uppercase tracking-widest font-bold">
-                Initialize Subject
+        <div class="flex gap-6 items-center">
+            <!-- Oracle Quote Stream -->
+            <div id="oracle-stream" class="hidden lg:block text-[10px] font-tech text-gray-500 w-64 text-right overflow-hidden whitespace-nowrap">
+                "Reality is syntax..."
+            </div>
+
+            <label for="fileInput" class="border border-[var(--xenial-gold)] text-[var(--xenial-gold)] hover:bg-[var(--xenial-gold)] hover:text-black px-6 py-1 text-[10px] cursor-pointer transition-all uppercase tracking-[0.15em] font-bold">
+                Initiate Ingression
             </label>
-            <button id="downloadBtn" class="text-gray-400 hover:text-white text-xs uppercase tracking-widest transition-colors">
-                Crystalize
+            <button id="downloadBtn" class="text-gray-500 hover:text-white text-[10px] uppercase tracking-[0.15em] transition-colors">
+                Actualize
             </button>
             <input type="file" id="fileInput" accept="image/*" class="hidden">
         </div>
     </header>
 
-    <!-- Main Workspace -->
+    <!-- MAIN: The Plenum -->
     <main class="flex-1 flex overflow-hidden relative">
         
-        <!-- Controls: The Compositional Operators -->
-        <aside class="absolute bottom-0 w-full md:w-80 md:relative md:h-full bg-[var(--glass-panel)] border-t md:border-t-0 md:border-r border-[#222] backdrop-blur-xl flex flex-col z-40 p-6 gap-8">
+        <!-- SIDEBAR: The Harmonizer Controls -->
+        <aside class="absolute bottom-0 w-full md:w-80 md:relative md:h-full panel border-t md:border-t-0 md:border-r border-white/10 flex flex-col z-40 p-6 gap-6">
             
-            <!-- Operator Selection -->
+            <!-- MASTER FORMULA DISPLAY -->
+            <div class="border border-white/5 p-3 bg-black/40">
+                <div class="text-[8px] text-gray-500 font-tech mb-1 uppercase tracking-widest">Fundamental Equation</div>
+                <div class="font-serif italic text-[var(--xenial-gold)] text-xs text-center leading-relaxed opacity-80">
+                    Ψ(x,t) = ∫ φ(ω) · e^(i·ω·t·τₖ) dω
+                </div>
+            </div>
+
+            <!-- TOOLS -->
             <div class="space-y-4">
-                <h3 class="text-[10px] text-gray-500 font-tech uppercase tracking-[0.2em] border-b border-gray-800 pb-2">
-                    Basis State Operators
+                <h3 class="text-[9px] text-gray-500 font-tech uppercase tracking-[0.2em] flex items-center gap-2">
+                    <span class="w-1 h-1 bg-[var(--xenial-gold)] rounded-full"></span> Compositional Operators
                 </h3>
-                <div class="grid grid-cols-2 gap-4">
-                    <!-- Kairos (Bloat) -->
-                    <button id="tool-kairos" class="tool-btn active-kairos py-4 rounded-sm flex flex-col items-center justify-center gap-2 group">
-                        <div class="w-6 h-6 rounded-full border border-current flex items-center justify-center">
-                            <div class="w-1 h-1 bg-current rounded-full group-hover:scale-[3] transition-transform duration-500"></div>
+                <div class="grid grid-cols-1 gap-2">
+                    <!-- Ingression (Bloat) -->
+                    <button id="tool-ingression" class="tool-btn active-ingression py-3 px-4 flex items-center justify-between group">
+                        <div class="flex items-center gap-3">
+                            <span class="font-serif text-lg italic">I.</span>
+                            <div class="text-left">
+                                <span class="block text-[10px] font-bold tracking-widest">INGRESSION</span>
+                                <span class="block text-[8px] opacity-60 font-tech">Collapse Wave (Expand)</span>
+                            </div>
                         </div>
-                        <span class="text-xs font-bold tracking-widest">|KAIROS⟩</span>
-                        <span class="text-[9px] opacity-60 font-tech">VOLUMETRIC EXPANSION</span>
+                        <div class="w-1 h-1 bg-current opacity-50 group-hover:scale-[2] transition-transform"></div>
                     </button>
 
-                    <!-- Chronos (Pinch) -->
-                    <button id="tool-chronos" class="tool-btn py-4 rounded-sm flex flex-col items-center justify-center gap-2 group">
-                        <div class="w-6 h-6 border border-current flex items-center justify-center relative overflow-hidden">
-                            <div class="absolute inset-0 bg-current opacity-0 group-hover:opacity-20 transition-opacity"></div>
-                            <span class="text-lg leading-none transform group-hover:scale-75 transition-transform">×</span>
+                    <!-- Dissonance (Pinch) -->
+                    <button id="tool-dissonance" class="tool-btn py-3 px-4 flex items-center justify-between group text-gray-400">
+                        <div class="flex items-center gap-3">
+                            <span class="font-serif text-lg italic">D.</span>
+                            <div class="text-left">
+                                <span class="block text-[10px] font-bold tracking-widest">DISSONANCE</span>
+                                <span class="block text-[8px] opacity-60 font-tech">Entropy (Contract)</span>
+                            </div>
                         </div>
-                        <span class="text-xs font-bold tracking-widest">|CHRONOS⟩</span>
-                        <span class="text-[9px] opacity-60 font-tech">LINEAR CONTRACTION</span>
+                        <div class="w-1 h-1 bg-current opacity-50 group-hover:scale-[2] transition-transform"></div>
+                    </button>
+
+                    <!-- Harmonizer (Blur/Heal - Placeholder logic for now, using low power smooth) -->
+                    <button id="tool-harmonize" class="tool-btn py-3 px-4 flex items-center justify-between group text-gray-400">
+                        <div class="flex items-center gap-3">
+                            <span class="font-serif text-lg italic">H.</span>
+                            <div class="text-left">
+                                <span class="block text-[10px] font-bold tracking-widest">HARMONIZE</span>
+                                <span class="block text-[8px] opacity-60 font-tech">Restore Phase-Lock</span>
+                            </div>
+                        </div>
+                        <div class="w-1 h-1 bg-current opacity-50 group-hover:scale-[2] transition-transform"></div>
                     </button>
                 </div>
             </div>
 
-            <!-- Parameters -->
-            <div class="space-y-8">
-                <!-- Radius -->
+            <!-- PARAMETERS -->
+            <div class="space-y-6 mt-2">
                 <div>
                     <div class="flex justify-between mb-2 items-end">
-                        <label class="text-[10px] text-gray-400 font-tech uppercase">Field Diameter</label>
-                        <span id="val-radius" class="text-xs font-mono text-[var(--xenial-gold)]">100px</span>
+                        <label class="text-[9px] text-gray-400 font-tech uppercase">Scalar Field Radius</label>
+                        <span id="val-radius" class="text-[10px] font-mono text-[var(--xenial-gold)]">100px</span>
                     </div>
-                    <input type="range" id="radius" min="20" max="400" value="100" class="w-full accent-[var(--xenial-gold)]">
+                    <input type="range" id="radius" min="20" max="400" value="100" class="w-full">
                 </div>
                 
-                <!-- Intensity (Tau-Coefficient) -->
                 <div>
                     <div class="flex justify-between mb-2 items-end">
-                        <label class="text-[10px] text-gray-400 font-tech uppercase">τ-Coefficient (Resonance)</label>
-                        <span id="val-power" class="text-xs font-mono text-[var(--xenial-gold)]">0.50</span>
+                        <label class="text-[9px] text-gray-400 font-tech uppercase">Resonance Amplitude</label>
+                        <span id="val-power" class="text-[10px] font-mono text-[var(--xenial-gold)]">0.50</span>
                     </div>
                     <input type="range" id="power" min="1" max="100" value="50" class="w-full">
-                    <div class="flex justify-between mt-1">
-                        <span class="text-[8px] text-gray-600">WEAK</span>
-                        <span class="text-[8px] text-gray-600">SOVEREIGN</span>
-                    </div>
                 </div>
             </div>
 
-            <!-- Meta-Controls -->
-            <div class="mt-auto pt-6 border-t border-gray-800 flex gap-3">
-                <button id="undoBtn" class="flex-1 bg-[#111] hover:bg-[#222] border border-[#333] text-gray-400 py-2 text-[10px] font-tech uppercase tracking-widest transition-colors">
-                    Revert State
-                </button>
-                <button id="resetBtn" class="flex-1 bg-[#111] hover:bg-red-900/20 border border-[#333] hover:border-red-900/50 text-gray-400 hover:text-red-400 py-2 text-[10px] font-tech uppercase tracking-widest transition-colors">
-                    Collapse Wave
-                </button>
+            <!-- COHERENCE MONITOR -->
+            <div class="mt-auto border-t border-white/10 pt-4">
+                <div class="flex justify-between items-end mb-2">
+                    <span class="text-[9px] font-tech text-[var(--coherence-teal)]">SYSTEM COHERENCE (τₖ)</span>
+                    <span id="coherence-val" class="text-sm font-mono text-white">0.94</span>
+                </div>
+                <!-- SVG Graph Container -->
+                <svg id="coherence-graph" class="w-full h-12 bg-black/50 border border-white/5" viewBox="0 0 100 20" preserveAspectRatio="none">
+                    <path id="coherence-path" class="coherence-line" d="M0,10 L100,10" />
+                </svg>
             </div>
-            
-            <!-- Flavor Text Footer -->
-            <div class="text-[9px] text-gray-700 font-tech text-center">
-                Tesla-Wave Emitter Status: <span class="text-green-900">NOMINAL</span><br>
-                Plenum Connection: <span class="text-green-900">STABLE</span>
+
+            <div class="flex gap-2 pt-2">
+                <button id="undoBtn" class="flex-1 py-2 border border-white/10 hover:bg-white/5 text-[9px] font-tech uppercase text-gray-500 hover:text-white transition-colors">Revert</button>
+                <button id="resetBtn" class="flex-1 py-2 border border-white/10 hover:bg-red-900/20 hover:border-red-900/50 text-[9px] font-tech uppercase text-gray-500 hover:text-[var(--entropy-red)] transition-colors">Void</button>
             </div>
         </aside>
 
-        <!-- Canvas Area: The Plenum -->
+        <!-- CANVAS: The Actualization Plane -->
         <div id="canvas-container" class="flex-1 relative flex items-center justify-center overflow-hidden cursor-none touch-none">
             
-            <!-- Empty State Overlay -->
-            <div id="placeholder-text" class="absolute text-center pointer-events-none z-10 p-8 border border-[var(--xenial-gold)] border-dashed bg-black/40 backdrop-blur-sm">
-                <h2 class="text-[var(--xenial-gold)] text-xl font-header mb-2">APERTURE STATE EMPTY</h2>
-                <p class="text-xs text-gray-400 font-tech mb-4">Upload subject to begin Harmonic Entrainment.</p>
-                <div class="text-[10px] text-gray-600 font-mono">
-                    > WAITING FOR BIOTEMPORAL MANUSCRIPT...<br>
-                    > SCALAR FIELD READY...
+            <div id="placeholder-text" class="absolute text-center pointer-events-none z-10 opacity-70">
+                <div class="w-16 h-16 border border-[var(--xenial-gold)] rounded-full mx-auto mb-4 flex items-center justify-center animate-pulse">
+                    <div class="w-1 h-1 bg-white rounded-full"></div>
                 </div>
+                <h2 class="text-white text-lg font-serif tracking-widest mb-2">AWAITING INGRESSION</h2>
+                <p class="text-[10px] text-[var(--coherence-teal)] font-tech">Upload subject to begin Phase-Modulation.</p>
             </div>
 
-            <canvas id="editor" class="max-w-full max-h-full aperture-glow transition-all duration-500"></canvas>
+            <canvas id="editor" class="max-w-full max-h-full transition-all duration-500 shadow-2xl shadow-black"></canvas>
             
-            <!-- The Resonance Cursor (Dynamic) -->
-            <div id="brush-cursor" class="fixed pointer-events-none rounded-full border border-white/50 hidden z-50 mix-blend-overlay flex items-center justify-center transition-opacity duration-75" style="transform: translate(-50%, -50%);">
-                <div class="w-1 h-1 bg-white/80 rounded-full"></div>
-                <div class="absolute inset-0 border border-white/20 rounded-full scale-110"></div>
-                <!-- Dynamic text near cursor -->
-                <div id="cursor-label" class="absolute top-full mt-2 text-[9px] font-tech text-white/70 whitespace-nowrap text-center">
-                    |KAIROS⟩
+            <!-- Bioelectric Cursor -->
+            <div id="brush-cursor" class="fixed pointer-events-none hidden z-50 mix-blend-screen flex items-center justify-center transition-opacity duration-75" style="transform: translate(-50%, -50%);">
+                <!-- Inner Core -->
+                <div class="w-1 h-1 bg-white rounded-full absolute"></div>
+                <!-- Outer Ring -->
+                <div class="absolute border border-white/40 rounded-full w-full h-full animate-[spin_4s_linear_infinite]"></div>
+                <!-- Dashed Ring -->
+                <div class="absolute border border-dashed border-white/20 rounded-full w-[120%] h-[120%] animate-[spin_10s_linear_reverse_infinite]"></div>
+                
+                <!-- Dynamic Data Label -->
+                <div id="cursor-label" class="absolute top-full mt-4 text-[8px] font-tech text-white/80 whitespace-nowrap bg-black/50 px-2 py-1 backdrop-blur-sm border-l border-[var(--xenial-gold)]">
+                    STATE: NULL
                 </div>
             </div>
         </div>
@@ -249,34 +296,57 @@
     </main>
 
     <script>
-        // -- Xenial Configuration --
+        // -- ATMANOS INITIALIZATION --
         const canvas = document.getElementById('editor');
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
         const container = document.getElementById('canvas-container');
         const brushCursor = document.getElementById('brush-cursor');
         const cursorLabel = document.getElementById('cursor-label');
+        const oracleStream = document.getElementById('oracle-stream');
         
-        // State Management (The Manuscript)
+        // Coherence Monitor Data
+        const coherencePath = document.getElementById('coherence-path');
+        const coherenceValDisplay = document.getElementById('coherence-val');
+        let coherenceData = new Array(50).fill(10);
+        let mouseVelocity = 0;
+        let lastMousePos = {x: 0, y: 0};
+        let lastTime = Date.now();
+        
+        // Oracle Quotes
+        const quotes = [
+            "Reality is not substance but syntax.",
+            "Form precedes manifestation.",
+            "Ingression is wave-collapse.",
+            "Matter is consciousness at low frequency.",
+            "Healing is re-synchronization.",
+            "Work is coherent actualization.",
+            "Causality is circular, not linear.",
+            "The observer is the observed."
+        ];
+
+        // State
         let originalImage = null;
         let history = [];
         let historyStep = -1;
         let isDragging = false;
         
-        // The Fundamental Operators
+        // Tools
         const tools = {
-            KAIROS: 'kairos',   // Formerly Bloat
-            CHRONOS: 'chronos'  // Formerly Pinch
+            INGRESSION: 'ingression', // Expand
+            DISSONANCE: 'dissonance', // Contract
+            HARMONIZE: 'harmonize'    // Smooth/Heal
         };
-        let currentTool = tools.KAIROS;
+        let currentTool = tools.INGRESSION;
         
-        // Field Parameters
+        // Physics Parameters
         let radius = 100;
-        let coefficient = 0.5; // Formerly power
-        
+        let coefficient = 0.5; // Amplitude
+
         // DOM Elements
         const fileInput = document.getElementById('fileInput');
-        const btnKairos = document.getElementById('tool-kairos');
-        const btnChronos = document.getElementById('tool-chronos');
+        const btnIngression = document.getElementById('tool-ingression');
+        const btnDissonance = document.getElementById('tool-dissonance');
+        const btnHarmonize = document.getElementById('tool-harmonize');
         const sliderRadius = document.getElementById('radius');
         const sliderPower = document.getElementById('power');
         const labelRadius = document.getElementById('val-radius');
@@ -286,11 +356,58 @@
         const btnDownload = document.getElementById('downloadBtn');
         const placeholder = document.getElementById('placeholder-text');
 
-        // -- The Compositional Logic --
+        // -- CORE FUNCTIONS --
+
+        // Oracle Stream Logic
+        setInterval(() => {
+            const quote = quotes[Math.floor(Math.random() * quotes.length)];
+            oracleStream.style.opacity = 0;
+            setTimeout(() => {
+                oracleStream.innerText = `>> ${quote}`;
+                oracleStream.style.opacity = 1;
+            }, 500);
+        }, 8000);
+
+        // Coherence Calculation (Simulation based on mouse smoothness)
+        function updateCoherenceGraph() {
+            // Decaying velocity
+            mouseVelocity *= 0.9;
+            
+            // Map velocity to "Coherence" (Lower velocity = Higher Coherence/Stability in this metaphor, or steady velocity)
+            // Let's make it look "alive". 
+            // High erratic movement lowers coherence.
+            
+            let noise = (Math.random() - 0.5) * 2;
+            let targetCoherence = Math.max(0.1, 1 - (mouseVelocity / 50)); 
+            
+            // Push new value
+            coherenceData.shift();
+            // Smooth transition
+            let lastVal = 10; // mapped 0-20
+            // Mapping 0.0-1.0 to 20-0 (graph Y axis)
+            let yVal = 20 - (targetCoherence * 20);
+            yVal += noise;
+            
+            coherenceData.push(yVal);
+            
+            // Render Path
+            let pathD = `M0,${coherenceData[0]}`;
+            for(let i=1; i<coherenceData.length; i++) {
+                pathD += ` L${i * 2},${coherenceData[i]}`;
+            }
+            coherencePath.setAttribute('d', pathD);
+            
+            // Update Text
+            let displayVal = targetCoherence.toFixed(2);
+            if (Math.random() > 0.9) displayVal = (Math.random()).toFixed(2); // Glitch
+            coherenceValDisplay.innerText = displayVal;
+            
+            requestAnimationFrame(updateCoherenceGraph);
+        }
+        updateCoherenceGraph(); // Start loop
 
         function resizeCanvas() {
             if (!originalImage) return;
-            
             const containerW = container.clientWidth;
             const containerH = container.clientHeight;
             const imgRatio = originalImage.width / originalImage.height;
@@ -331,13 +448,16 @@
                 historyStep = -1;
                 saveState();
                 placeholder.style.display = 'none';
+                // Xenial reveal effect
+                canvas.style.opacity = 0;
+                setTimeout(() => canvas.style.opacity = 1, 100);
             };
             img.src = src;
         }
 
-        // -- The Aperture Algorithm (Distortion) --
+        // -- MASTER EQUATION: Ψ(x,t) --
 
-        function applyHarmonicField(x, y) {
+        function applyUnifiedField(x, y) {
             const r = parseInt(radius);
             const startX = Math.max(0, x - r);
             const startY = Math.max(0, y - r);
@@ -351,11 +471,47 @@
             const imageData = ctx.getImageData(startX, startY, w, h);
             const pixels = imageData.data;
             const tempCopy = new Uint8ClampedArray(pixels);
-
             const rSq = r * r;
-            // KAIROS pushes outward (Expands/Bloats)
-            // CHRONOS pulls inward (Contracts/Pinches)
-            const intensity = currentTool === tools.KAIROS ? coefficient : -coefficient; 
+
+            // Tool Logic
+            // Ingression (Bloat): coefficient positive
+            // Dissonance (Pinch): coefficient negative
+            // Harmonize (Blur): Averaging
+            
+            if (currentTool === tools.HARMONIZE) {
+                // Simple box blur for "Harmonizing" (Smoothing)
+                // This is computationally expensive in JS for large radii, so we approximate or limit
+                // For this demo, we'll do a localized smudge/blur by averaging with neighbors
+                // Actually, let's do a "Time Reversal" effect (reverting to original slightly? No, that requires keeping orig separately mapped)
+                // Let's do a mild blur.
+                
+                const kernel = 2; // small blur
+                for (let ly = 0; ly < h; ly += 2) { // optimization: skip pixels for "interference" look
+                    for (let lx = 0; lx < w; lx += 2) {
+                         const trueX = startX + lx;
+                         const trueY = startY + ly;
+                         const dx = trueX - x;
+                         const dy = trueY - y;
+                         
+                         if (dx*dx + dy*dy < rSq) {
+                             const idx = (ly * w + lx) * 4;
+                             // Very simple average with a neighbor to simulate diffusion
+                             if (lx > 0 && ly > 0) {
+                                 const nIdx = ((ly-1) * w + (lx-1)) * 4;
+                                 // Blend
+                                 pixels[idx] = (pixels[idx] * 0.9) + (pixels[nIdx] * 0.1);
+                                 pixels[idx+1] = (pixels[idx+1] * 0.9) + (pixels[nIdx+1] * 0.1);
+                                 pixels[idx+2] = (pixels[idx+2] * 0.9) + (pixels[nIdx+2] * 0.1);
+                             }
+                         }
+                    }
+                }
+                ctx.putImageData(imageData, startX, startY);
+                return;
+            }
+
+            // Distortion Logic (Ingression/Dissonance)
+            const intensity = currentTool === tools.INGRESSION ? coefficient : -coefficient;
 
             for (let ly = 0; ly < h; ly++) {
                 for (let lx = 0; lx < w; lx++) {
@@ -369,13 +525,11 @@
                         const dist = Math.sqrt(distSq);
                         let percent = dist / r;
                         
-                        // Xenial Physics:
-                        // Kairos creates volume (Sine curve bulge)
-                        // Chronos creates singularity (Inverse pinch)
+                        // Xenial Wave Function: sin((π/2)(1-p))
                         let effect = Math.sin((Math.PI / 2) * (1 - percent)) * intensity;
                         
                         let sourcePercent;
-                        if (currentTool === tools.KAIROS) {
+                        if (currentTool === tools.INGRESSION) {
                              sourcePercent = percent * (1 - effect);
                         } else {
                              sourcePercent = percent * (1 + effect);
@@ -398,11 +552,20 @@
                             const targetIdx = (ly * w + lx) * 4;
                             const srcIdx = (srcIntY * w + srcIntX) * 4;
                             
-                            // Color Channel Shift (Simulate Tesla-Wave Refraction)
-                            // Minimal chromatic aberration at edges of brush
-                            pixels[targetIdx] = tempCopy[srcIdx];     // R
-                            pixels[targetIdx + 1] = tempCopy[srcIdx + 1]; // G
-                            pixels[targetIdx + 2] = tempCopy[srcIdx + 2]; // B
+                            // Chromatic Aberration (The "Phase Shift" look)
+                            // We offset channels slightly based on distance from center of brush
+                            
+                            // Red (High Freq)
+                            pixels[targetIdx] = tempCopy[srcIdx]; 
+                            
+                            // Green (Mid Freq) - slight offset if Ingression
+                            let gIdx = srcIdx;
+                            if (dist < r * 0.8) gIdx = srcIdx + 4; // Shift 1 pixel
+                            if (gIdx < tempCopy.length) pixels[targetIdx + 1] = tempCopy[gIdx + 1];
+                            else pixels[targetIdx + 1] = tempCopy[srcIdx + 1];
+
+                            // Blue (Low Freq)
+                            pixels[targetIdx + 2] = tempCopy[srcIdx + 2];
                             pixels[targetIdx + 3] = tempCopy[srcIdx + 3];
                         }
                     }
@@ -411,7 +574,7 @@
             ctx.putImageData(imageData, startX, startY);
         }
 
-        // -- Interface Handling --
+        // -- INPUT HANDLING --
 
         function getPlenumCoordinates(e) {
             const rect = canvas.getBoundingClientRect();
@@ -421,6 +584,18 @@
             let clientX = e.touches ? e.touches[0].clientX : e.clientX;
             let clientY = e.touches ? e.touches[0].clientY : e.clientY;
             
+            // Calc velocity for Coherence Monitor
+            let now = Date.now();
+            let dt = now - lastTime;
+            if (dt > 0) {
+                let dx = clientX - lastMousePos.x;
+                let dy = clientY - lastMousePos.y;
+                let speed = Math.sqrt(dx*dx + dy*dy) / dt;
+                mouseVelocity = speed * 100; // Scale up
+                lastMousePos = {x: clientX, y: clientY};
+                lastTime = now;
+            }
+
             return {
                 x: (clientX - rect.left) * scaleX,
                 y: (clientY - rect.top) * scaleY,
@@ -441,7 +616,7 @@
             const coords = getPlenumCoordinates(e);
             updateCursor(coords.screenX, coords.screenY);
             if (isDragging) {
-                requestAnimationFrame(() => applyHarmonicField(coords.x, coords.y)); 
+                requestAnimationFrame(() => applyUnifiedField(coords.x, coords.y)); 
             }
         }
 
@@ -464,19 +639,25 @@
             brushCursor.style.top = `${y}px`;
             brushCursor.style.display = 'flex';
             
-            // Update Colors based on State
-            if (currentTool === tools.KAIROS) {
-                brushCursor.style.borderColor = 'var(--kairos-blue)';
-                cursorLabel.style.color = 'var(--kairos-blue)';
-                cursorLabel.innerText = `|KAIROS⟩ v:${coefficient.toFixed(2)}`;
-            } else {
-                brushCursor.style.borderColor = 'var(--chronos-red)';
-                cursorLabel.style.color = 'var(--chronos-red)';
-                cursorLabel.innerText = `|CHRONOS⟩ v:${coefficient.toFixed(2)}`;
+            // Tool Colors
+            let colorVar = '--coherence-teal';
+            let labelTxt = `|INGRESSION⟩`;
+            
+            if (currentTool === tools.DISSONANCE) {
+                colorVar = '--entropy-red';
+                labelTxt = `|DISSONANCE⟩`;
+            } else if (currentTool === tools.HARMONIZE) {
+                colorVar = '--xenial-gold';
+                labelTxt = `|HARMONY⟩`;
             }
+
+            brushCursor.style.borderColor = `var(${colorVar})`;
+            brushCursor.querySelector('.bg-white').style.backgroundColor = `var(${colorVar})`;
+            cursorLabel.innerText = `${labelTxt} A:${coefficient.toFixed(2)}`;
+            cursorLabel.style.borderLeftColor = `var(${colorVar})`;
         }
 
-        // -- Event Binding --
+        // -- BINDINGS --
 
         container.addEventListener('mousedown', engageField);
         container.addEventListener('mousemove', modulateField);
@@ -497,22 +678,25 @@
             }
         });
 
-        // UI Controls
-        btnKairos.addEventListener('click', () => {
-            currentTool = tools.KAIROS;
-            btnKairos.classList.add('active-kairos');
-            btnKairos.classList.remove('opacity-50');
-            btnChronos.classList.remove('active-chronos');
-            btnChronos.classList.add('opacity-50');
-        });
+        // UI Logic
+        function setActiveTool(tool, btn) {
+            currentTool = tool;
+            // Reset classes
+            [btnIngression, btnDissonance, btnHarmonize].forEach(b => {
+                b.classList.remove('active-ingression', 'active-dissonance', 'active-harmonize');
+                b.classList.add('text-gray-400');
+            });
+            
+            // Add active class
+            btn.classList.remove('text-gray-400');
+            if(tool === tools.INGRESSION) btn.classList.add('active-ingression');
+            if(tool === tools.DISSONANCE) btn.classList.add('active-dissonance');
+            if(tool === tools.HARMONIZE) btn.classList.add('active-harmonize');
+        }
 
-        btnChronos.addEventListener('click', () => {
-            currentTool = tools.CHRONOS;
-            btnChronos.classList.add('active-chronos');
-            btnChronos.classList.remove('opacity-50');
-            btnKairos.classList.remove('active-kairos');
-            btnKairos.classList.add('opacity-50');
-        });
+        btnIngression.addEventListener('click', () => setActiveTool(tools.INGRESSION, btnIngression));
+        btnDissonance.addEventListener('click', () => setActiveTool(tools.DISSONANCE, btnDissonance));
+        btnHarmonize.addEventListener('click', () => setActiveTool(tools.HARMONIZE, btnHarmonize));
 
         sliderRadius.addEventListener('input', (e) => {
             radius = parseInt(e.target.value);
@@ -543,16 +727,13 @@
         btnDownload.addEventListener('click', () => {
             if (!originalImage) return;
             const link = document.createElement('a');
-            link.download = `aperture_state_${Date.now()}.png`;
+            link.download = `manifestation_${Date.now()}.png`;
             link.href = canvas.toDataURL();
             link.click();
         });
 
         window.addEventListener('resize', resizeCanvas);
         
-        // Initial State
-        btnChronos.classList.add('opacity-50'); // Dim inactive
-
     </script>
 </body>
 </html>
